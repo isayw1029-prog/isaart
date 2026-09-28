@@ -1,4 +1,5 @@
 name: Deploy website to GitHub Pages
+# Force a fresh Pages deployment after publishing-source changes.
 
 on:
   push:
