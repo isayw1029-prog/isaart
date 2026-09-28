@@ -35,6 +35,12 @@ jobs:
           mkdir -p _site
           unzip -q "Isabellay07-island-latest-github-pages-github25mb.zip" -d _site
           test -f _site/index.html
+
+          # GitHub Pages serves this site under /isaart/ rather than domain root.
+          # Rewrite root-absolute asset URLs so the existing Vite build works there.
+          find _site -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.json' -o -name '*.map' \) -print0 | xargs -0 sed -i 's#/assets/#/isaart/assets/#g'
+          find _site -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' \) -print0 | xargs -0 sed -i 's#/favicon.svg#/isaart/favicon.svg#g'
+
           echo "Website files:"
           find _site -maxdepth 2 -type f | head -50
 
